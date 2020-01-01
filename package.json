@@ -1,0 +1,15 @@
+{
+  "name": "com.blai30.rpgsystems",
+  "version": "1.0.0",
+  "displayName": "RPG Systems",
+  "description": "Core systems for RPG games in Unity",
+  "unity": "2019.3",
+  "unityRelease": "0f3",
+  "dependencies": {
+ },
+ "keywords": [
+  ],
+  "author": {
+    "name": "Brian Lai"
+  }
+}
