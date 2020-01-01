@@ -7,30 +7,33 @@ namespace blai30.RPGSystems.StatsSystem
     [Serializable]
     public class CharacterStat
     {
-        public float BaseValue;
-        public readonly ReadOnlyCollection<StatModifier> StatModifiers;
-        public virtual float Value
+        public float baseValue;
+        public readonly ReadOnlyCollection<StatModifier> statModifiers;
+        public virtual float value
         {
             get
             {
-                if (!m_IsDirty && m_LastBaseValue == BaseValue) return m_Value;
-                m_LastBaseValue = BaseValue;
-                m_Value = CalculateFinalValue();
-                m_IsDirty = false;
+                if (!IsDirty && LastBaseValue == baseValue) return Value;
+                LastBaseValue = baseValue;
+                Value = CalculateFinalValue();
+                IsDirty = false;
 
-                return m_Value;
+                return Value;
             }
         }
 
-        protected readonly List<StatModifier> m_StatModifiers;
-        protected bool m_IsDirty = true;
-        protected float m_Value;
-        protected float m_LastBaseValue = float.MinValue;
+        protected readonly List<StatModifier> StatModifiers;
+        protected bool IsDirty = true;
+        protected float Value;
+        protected float LastBaseValue = float.MinValue;
 
+        /// <summary>
+        /// Initialize a new character stat.
+        /// </summary>
         public CharacterStat()
         {
-            m_StatModifiers = new List<StatModifier>();
-            StatModifiers = m_StatModifiers.AsReadOnly();
+            StatModifiers = new List<StatModifier>();
+            statModifiers = StatModifiers.AsReadOnly();
         }
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace blai30.RPGSystems.StatsSystem
         /// <param name="baseValue">Default value of the stat</param>
         public CharacterStat(float baseValue) : this()
         {
-            BaseValue = baseValue;
+            this.baseValue = baseValue;
         }
 
         /// <summary>
@@ -48,9 +51,9 @@ namespace blai30.RPGSystems.StatsSystem
         /// <param name="modifier">Stat modifier to be added</param>
         public virtual void AddModifier(StatModifier modifier)
         {
-            m_IsDirty = true;
-            m_StatModifiers.Add(modifier);
-            m_StatModifiers.Sort(CompareModifierOrder);
+            IsDirty = true;
+            StatModifiers.Add(modifier);
+            StatModifiers.Sort(CompareModifierOrder);
         }
 
         /// <summary>
@@ -60,22 +63,27 @@ namespace blai30.RPGSystems.StatsSystem
         /// <returns>Successful procedure</returns>
         public virtual bool RemoveModifier(StatModifier modifier)
         {
-            if (!m_StatModifiers.Remove(modifier)) return false;
-            m_IsDirty = true;
+            if (!StatModifiers.Remove(modifier)) return false;
+            IsDirty = true;
             return true;
 
         }
 
+        /// <summary>
+        /// Removes all stat modifiers from the source.
+        /// </summary>
+        /// <param name="source">Source to remove all stat modifiers from</param>
+        /// <returns>Successful procedure</returns>
         public virtual bool RemoveAllModifiersFromSource(object source)
         {
             bool didRemove = false;
-            for (int i = m_StatModifiers.Count; i >= 0; i--)
+            for (int i = StatModifiers.Count; i >= 0; i--)
             {
-                if (m_StatModifiers[i].Source == source)
+                if (StatModifiers[i].Source == source)
                 {
-                    m_IsDirty = true;
+                    IsDirty = true;
                     didRemove = true;
-                    m_StatModifiers.RemoveAt(i);
+                    StatModifiers.RemoveAt(i);
                 }
             }
 
@@ -89,12 +97,12 @@ namespace blai30.RPGSystems.StatsSystem
         protected virtual float CalculateFinalValue()
         {
             // foreach statModifier in m_StatModifiers, BaseValue += statModifier.Value
-            float finalValue = BaseValue;
+            float finalValue = baseValue;
             float sumPercentAdditive = 0;
 
-            for (int i = 0; i < m_StatModifiers.Count; i++)
+            for (int i = 0; i < StatModifiers.Count; i++)
             {
-                StatModifier mod = m_StatModifiers[i];
+                StatModifier mod = StatModifiers[i];
                 switch (mod.Type)
                 {
                     case StatModifierType.Flat:
@@ -102,7 +110,7 @@ namespace blai30.RPGSystems.StatsSystem
                         break;
                     case StatModifierType.PercentAdditive:
                         sumPercentAdditive += mod.Value;
-                        if (i + 1 >= m_StatModifiers.Count || m_StatModifiers[i + 1].Type != StatModifierType.PercentAdditive)
+                        if (i + 1 >= StatModifiers.Count || StatModifiers[i + 1].Type != StatModifierType.PercentAdditive)
                         {
                             finalValue *= 1 + sumPercentAdditive;
                             sumPercentAdditive = 0;
@@ -118,6 +126,12 @@ namespace blai30.RPGSystems.StatsSystem
             return (float) Math.Round(finalValue, 4);
         }
 
+        /// <summary>
+        /// Compares the order of two stat modifiers.
+        /// </summary>
+        /// <param name="x">First stat modifier</param>
+        /// <param name="y">Second stat modifier</param>
+        /// <returns>The order of x and y</returns>
         protected virtual int CompareModifierOrder(StatModifier x, StatModifier y)
         {
             return x.Order < y.Order ? -1 : x.Order > y.Order ? 1 : 0;
