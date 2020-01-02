@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 namespace blai30.RPGSystems.StatsSystem
 {
     [Serializable]
-    public class CharacterStat
+    public class Stat
     {
         public float baseValue;
         public readonly ReadOnlyCollection<StatModifier> statModifiers;
@@ -13,10 +13,12 @@ namespace blai30.RPGSystems.StatsSystem
         {
             get
             {
-                if (!IsDirty && LastBaseValue == baseValue) return Value;
-                LastBaseValue = baseValue;
-                Value = CalculateFinalValue();
-                IsDirty = false;
+                if (IsDirty || LastBaseValue != baseValue)
+                {
+                    LastBaseValue = baseValue;
+                    Value = CalculateFinalValue();
+                    IsDirty = false;
+                }
 
                 return Value;
             }
@@ -30,7 +32,7 @@ namespace blai30.RPGSystems.StatsSystem
         /// <summary>
         /// Initialize a new character stat.
         /// </summary>
-        public CharacterStat()
+        public Stat()
         {
             StatModifiers = new List<StatModifier>();
             statModifiers = StatModifiers.AsReadOnly();
@@ -40,7 +42,7 @@ namespace blai30.RPGSystems.StatsSystem
         /// Initialize a new character stat with a default base value.
         /// </summary>
         /// <param name="baseValue">Default value of the stat</param>
-        public CharacterStat(float baseValue) : this()
+        public Stat(float baseValue) : this()
         {
             this.baseValue = baseValue;
         }
@@ -52,8 +54,12 @@ namespace blai30.RPGSystems.StatsSystem
         public virtual void AddModifier(StatModifier modifier)
         {
             IsDirty = true;
-            StatModifiers.Add(modifier);
-            StatModifiers.Sort(CompareModifierOrder);
+            int index = StatModifiers.BinarySearch(modifier, new ByPriority());
+            if (index < 0)
+            {
+                index = ~index;
+            }
+            StatModifiers.Insert(index, modifier);
         }
 
         /// <summary>
@@ -63,7 +69,10 @@ namespace blai30.RPGSystems.StatsSystem
         /// <returns>Successful procedure</returns>
         public virtual bool RemoveModifier(StatModifier modifier)
         {
-            if (!StatModifiers.Remove(modifier)) return false;
+            if (!StatModifiers.Remove(modifier))
+            {
+                return false;
+            }
             IsDirty = true;
             return true;
 
@@ -132,9 +141,16 @@ namespace blai30.RPGSystems.StatsSystem
         /// <param name="x">First stat modifier</param>
         /// <param name="y">Second stat modifier</param>
         /// <returns>The order of x and y</returns>
-        protected virtual int CompareModifierOrder(StatModifier x, StatModifier y)
+        // protected virtual int CompareModifierOrder(StatModifier x, StatModifier y)
+        // {
+        //     return x.Order < y.Order ? -1 : x.Order > y.Order ? 1 : 0;
+        // }
+        private class ByPriority : IComparer<StatModifier>
         {
-            return x.Order < y.Order ? -1 : x.Order > y.Order ? 1 : 0;
+            public int Compare(StatModifier x, StatModifier y)
+            {
+                return x.Order < y.Order ? -1 : x.Order > y.Order ? 1 : 0;
+            }
         }
     }
 }
