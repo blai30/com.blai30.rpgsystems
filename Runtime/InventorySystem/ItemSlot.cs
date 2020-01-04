@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace blai30.RPGSystems.InventorySystem
 {
-    public class ItemSlot : MonoBehaviour
+    public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private Image image;
+
+        public event Action<Item> OnRightClickEvent;
 
         public Item item
         {
@@ -19,7 +23,7 @@ namespace blai30.RPGSystems.InventorySystem
                 }
                 else
                 {
-                    image.sprite = m_Item.ItemIcon;
+                    image.sprite = m_Item.itemIcon;
                     image.enabled = true;
                 }
             }
@@ -27,11 +31,22 @@ namespace blai30.RPGSystems.InventorySystem
 
         private Item m_Item;
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             if (image == null)
             {
                 image = GetComponent<Image>();
+            }
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData != null && eventData.button == PointerEventData.InputButton.Right)
+            {
+                if (item != null)
+                {
+                    OnRightClickEvent?.Invoke(item);
+                }
             }
         }
     }
