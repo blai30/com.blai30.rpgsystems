@@ -86,7 +86,7 @@ namespace blai30.RPGSystems.StatsSystem
         public virtual bool RemoveAllModifiersFromSource(object source)
         {
             bool didRemove = false;
-            for (int i = StatModifiers.Count; i >= 0; i--)
+            for (int i = StatModifiers.Count - 1; i >= 0; i--)
             {
                 if (StatModifiers[i].Source == source)
                 {

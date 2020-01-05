@@ -27,7 +27,7 @@ namespace blai30.RPGSystems.InventorySystem
         {
             foreach (EquipmentSlot slot in equipmentSlots)
             {
-                if (slot.equipmentType != item.equimentType)
+                if (slot.equipmentType != item.equipmentType)
                 {
                     continue;
                 }

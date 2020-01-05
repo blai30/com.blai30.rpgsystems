@@ -1,14 +1,23 @@
+using blai30.RPGSystems.StatsSystem;
 using UnityEngine;
 
 namespace blai30.RPGSystems.InventorySystem
 {
-    public class InventoryManager : MonoBehaviour
+    public class Character : MonoBehaviour
     {
+        public Stat strength;
+        public Stat dexterity;
+        public Stat intellect;
+        public Stat vitality;
+
         [SerializeField] private Inventory inventory;
         [SerializeField] private EquipmentPanel equipmentPanel;
+        [SerializeField] private StatPanel statPanel;
 
         private void Awake()
         {
+            statPanel.SetStats(strength, dexterity, intellect, vitality);
+            statPanel.UpdateStatValues();
             inventory.OnItemRightClickedEvent += EquipFromInventory;
             equipmentPanel.OnItemRightClickedEvent += UnequipFromInventory;
         }
@@ -19,13 +28,18 @@ namespace blai30.RPGSystems.InventorySystem
             {
                 return;
             }
+
             EquipmentItem previousItem;
             if (equipmentPanel.AddItem(item, out previousItem))
             {
                 if (previousItem != null)
                 {
                     inventory.AddItem(previousItem);
+                    previousItem.Unequip(this);
+                    statPanel.UpdateStatValues();
                 }
+                item.Equip(this);
+                statPanel.UpdateStatValues();
             }
             else
             {
@@ -37,6 +51,8 @@ namespace blai30.RPGSystems.InventorySystem
         {
             if (!inventory.IsFull() && equipmentPanel.RemoveItem(item))
             {
+                item.Unequip(this);
+                statPanel.UpdateStatValues();
                 inventory.AddItem(item);
             }
         }
