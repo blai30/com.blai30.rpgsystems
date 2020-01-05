@@ -13,7 +13,7 @@ namespace blai30.RPGSystems.StatsSystem
         {
             get
             {
-                if (IsDirty || LastBaseValue != baseValue)
+                if (IsDirty || Math.Abs(LastBaseValue - baseValue) > 0.0000001)
                 {
                     LastBaseValue = baseValue;
                     Value = CalculateFinalValue();

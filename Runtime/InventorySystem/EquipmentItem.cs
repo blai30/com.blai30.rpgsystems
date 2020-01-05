@@ -1,3 +1,4 @@
+using System;
 using blai30.RPGSystems.StatsSystem;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace blai30.RPGSystems.InventorySystem
         Belt
     }
 
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "RPG Systems/Inventory/Equipment Item")]
     public class EquipmentItem : Item
     {
         public int strengthBonus;
@@ -51,19 +52,19 @@ namespace blai30.RPGSystems.InventorySystem
                 character.vitality.AddModifier(new StatModifier(vitalityBonus, StatModifierType.Flat, this));
             }
 
-            if (strengthPercentBonus != 0)
+            if (Math.Abs(strengthPercentBonus) > 0.0000001)
             {
                 character.strength.AddModifier(new StatModifier(strengthPercentBonus, StatModifierType.PercentMultiplicative, this));
             }
-            if (dexterityPercentBonus != 0)
+            if (Math.Abs(dexterityPercentBonus) > 0.0000001)
             {
                 character.dexterity.AddModifier(new StatModifier(dexterityPercentBonus, StatModifierType.PercentMultiplicative, this));
             }
-            if (intellectPercentBonus != 0)
+            if (Math.Abs(intellectPercentBonus) > 0.0000001)
             {
                 character.intellect.AddModifier(new StatModifier(intellectPercentBonus, StatModifierType.PercentMultiplicative, this));
             }
-            if (vitalityPercentBonus != 0)
+            if (Math.Abs(vitalityPercentBonus) > 0.0000001)
             {
                 character.vitality.AddModifier(new StatModifier(vitalityPercentBonus, StatModifierType.PercentMultiplicative, this));
             }
