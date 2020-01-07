@@ -19,6 +19,8 @@ namespace blai30.RPGSystems.Inventory
     public abstract class StackableItem : Item
     {
         [SerializeField] private int maxStackQuantity = 100;
+
+        public int MaxStackQuantity => maxStackQuantity;
     }
 
     internal interface IEquippable
@@ -26,6 +28,10 @@ namespace blai30.RPGSystems.Inventory
     }
 
     internal interface IConsumable
+    {
+    }
+
+    internal interface IIngredient
     {
     }
 }

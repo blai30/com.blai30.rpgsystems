@@ -7,7 +7,7 @@ namespace blai30.RPGSystems.Stats
     [Serializable]
     public class Stat : IStat
     {
-        public float baseValue;
+        public float baseValue = 0f;
         public readonly ReadOnlyCollection<StatModifier> statModifiers;
         public float Value
         {

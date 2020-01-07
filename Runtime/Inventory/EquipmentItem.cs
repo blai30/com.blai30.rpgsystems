@@ -5,26 +5,11 @@ using UnityEngine;
 
 namespace blai30.RPGSystems.Inventory
 {
-    public enum EquipmentType
-    {
-        WeaponMain,
-        WeaponSub,
-        Helmet,
-        Chest,
-        Legs,
-        Gloves,
-        Boots,
-        Ring,
-        Earring,
-        Belt
-    }
-
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Equipment Item", order = 0)]
     public class EquipmentItem : Item, IEquippable
     {
         [Header("Equipment Item")]
-        [SerializeField] private EquipmentType equipmentType;
-        [Header("Stat bonuses")]
+        [SerializeField] private EquipmentType equipmentType = null;
         [SerializeField] private List<StatBonus> statBonuses = new List<StatBonus>();
 
         public List<StatBonus> StatBonuses => statBonuses;
@@ -32,9 +17,9 @@ namespace blai30.RPGSystems.Inventory
         [Serializable]
         public class StatBonus
         {
-            [SerializeField] private StatType statType;
-            [SerializeField] private StatModifierType modifierType;
-            [SerializeField] private float value;
+            [SerializeField] private StatType statType = null;
+            [SerializeField] private StatModifierType modifierType = 0;
+            [SerializeField] private float value = 0f;
 
             public StatType StatType => statType;
             public StatModifierType ModifierType => modifierType;

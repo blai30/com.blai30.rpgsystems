@@ -6,8 +6,8 @@ namespace blai30.RPGSystems.Inventory
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField] private List<Item> items;
-        [SerializeField] private Transform itemsParent;
+        [SerializeField] private List<Item> items = null;
+        [SerializeField] private Transform itemsParent = null;
         [SerializeField] private ItemSlot[] itemSlots;
 
         public event Action<Item> OnItemRightClickedEvent;
