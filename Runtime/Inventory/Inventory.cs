@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace blai30.RPGSystems.InventorySystem
+namespace blai30.RPGSystems.Inventory
 {
     public class Inventory : MonoBehaviour
     {

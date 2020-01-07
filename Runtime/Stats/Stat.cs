@@ -2,31 +2,31 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace blai30.RPGSystems.StatsSystem
+namespace blai30.RPGSystems.Stats
 {
     [Serializable]
-    public class Stat
+    public class Stat : IStat
     {
         public float baseValue;
         public readonly ReadOnlyCollection<StatModifier> statModifiers;
-        public virtual float value
+        public float Value
         {
             get
             {
                 if (IsDirty || Math.Abs(LastBaseValue - baseValue) > 0.0000001)
                 {
                     LastBaseValue = baseValue;
-                    Value = CalculateFinalValue();
+                    CurrentValue = CalculateFinalValue();
                     IsDirty = false;
                 }
 
-                return Value;
+                return CurrentValue;
             }
         }
 
         protected readonly List<StatModifier> StatModifiers;
         protected bool IsDirty = true;
-        protected float Value;
+        protected float CurrentValue;
         protected float LastBaseValue = float.MinValue;
 
         /// <summary>
@@ -41,10 +41,21 @@ namespace blai30.RPGSystems.StatsSystem
         /// <summary>
         /// Initialize a new character stat with a default base value.
         /// </summary>
-        /// <param name="baseValue">Default value of the stat</param>
-        public Stat(float baseValue) : this()
+        /// <param name="initialValue">Default value of the stat</param>
+        public Stat(float initialValue) : this()
         {
-            this.baseValue = baseValue;
+            baseValue = initialValue;
+        }
+
+        public Stat(IStatType type)
+        {
+            baseValue = type.DefaultValue;
+        }
+
+        public void UpdateBaseValue(float newValue)
+        {
+            IsDirty = true;
+            baseValue = newValue;
         }
 
         /// <summary>

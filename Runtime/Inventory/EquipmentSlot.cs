@@ -1,4 +1,4 @@
-namespace blai30.RPGSystems.InventorySystem
+namespace blai30.RPGSystems.Inventory
 {
     public class EquipmentSlot : ItemSlot
     {

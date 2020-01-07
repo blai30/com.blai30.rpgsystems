@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace blai30.RPGSystems.InventorySystem
+namespace blai30.RPGSystems.Inventory
 {
     public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
@@ -23,7 +23,7 @@ namespace blai30.RPGSystems.InventorySystem
                 }
                 else
                 {
-                    image.sprite = m_Item.itemIcon;
+                    image.sprite = m_Item.ItemIcon;
                     image.enabled = true;
                 }
             }

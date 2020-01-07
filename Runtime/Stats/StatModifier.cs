@@ -1,4 +1,4 @@
-namespace blai30.RPGSystems.StatsSystem
+namespace blai30.RPGSystems.Stats
 {
     public enum StatModifierType
     {
