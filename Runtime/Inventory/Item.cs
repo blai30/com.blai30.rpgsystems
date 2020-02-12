@@ -27,15 +27,8 @@ namespace blai30.RPGSystems.Inventory
         public int MaxStackQuantity => maxStackQuantity;
     }
 
-    internal interface IEquippable
+    internal interface IUsable
     {
-    }
-
-    internal interface IConsumable
-    {
-    }
-
-    internal interface IIngredient
-    {
+        bool UseItem();
     }
 }

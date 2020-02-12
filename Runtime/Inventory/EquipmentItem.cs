@@ -6,7 +6,7 @@ using UnityEngine;
 namespace blai30.RPGSystems.Inventory
 {
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Equipment Item", order = 0)]
-    public class EquipmentItem : Item, IEquippable
+    public class EquipmentItem : Item, IUsable
     {
         [Header("Equipment Item")]
         [SerializeField] private EquipmentType equipmentType = null;
@@ -24,6 +24,11 @@ namespace blai30.RPGSystems.Inventory
             public StatType StatType => statType;
             public StatModifierType ModifierType => modifierType;
             public float Value => value;
+        }
+
+        public bool UseItem()
+        {
+            return false;
         }
     }
 }

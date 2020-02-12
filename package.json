@@ -4,7 +4,7 @@
   "displayName": "RPG Systems",
   "description": "Core systems for RPG games in Unity",
   "unity": "2019.3",
-  "unityRelease": "0f3",
+  "unityRelease": "0f6",
   "dependencies": {
     "com.unity.textmeshpro": "2.0.1"
   },
