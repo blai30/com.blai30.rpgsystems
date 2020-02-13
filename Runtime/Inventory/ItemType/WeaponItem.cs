@@ -7,7 +7,7 @@ namespace blai30.RPGSystems.Inventory
     public class WeaponItem : EquipmentItem
     {
         [Header("Weapon Item")]
-        [SerializeField] private WeaponType weaponType = null;
-        [SerializeField] private DamageType damageType = null;
+        [SerializeField] protected WeaponType weaponType = null;
+        [SerializeField] protected DamageType damageType = null;
     }
 }

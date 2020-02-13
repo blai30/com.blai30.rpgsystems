@@ -9,10 +9,15 @@ namespace blai30.RPGSystems.Inventory
     public class EquipmentItem : Item, IUsable
     {
         [Header("Equipment Item")]
-        [SerializeField] private EquipmentType equipmentType = null;
-        [SerializeField] private List<StatBonus> statBonuses = new List<StatBonus>();
+        [SerializeField] protected EquipmentType equipmentType = null;
+        [SerializeField] protected List<StatBonus> statBonuses = new List<StatBonus>();
 
         public List<StatBonus> StatBonuses => statBonuses;
+
+        public EquipmentItem()
+        {
+            maxStackQuantity = 1;
+        }
 
         [Serializable]
         public class StatBonus
