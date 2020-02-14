@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace blai30.RPGSystems.Inventory
 {
+    [Serializable]
     public abstract class Item : ScriptableObject
     {
         [Header("Properties")]
