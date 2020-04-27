@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace blai30.RPGSystems.Inventory
@@ -22,6 +24,11 @@ namespace blai30.RPGSystems.Inventory
         public int SellPrice => sellPrice;
         public int MaxStackQuantity => maxStackQuantity;
         public ItemRarity RarityTier => rarityTier;
+
+        private void OnValidate()
+        {
+            itemName = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this));
+        }
     }
 
     internal interface IUsable

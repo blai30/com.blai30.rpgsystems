@@ -8,17 +8,6 @@ namespace blai30.RPGSystems.Inventory
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Equipment Item", order = 0)]
     public class EquipmentItem : Item, IUsable
     {
-        [Header("Equipment Item")]
-        [SerializeField] protected EquipmentType equipmentType = null;
-        [SerializeField] protected List<StatBonus> statBonuses = new List<StatBonus>();
-
-        public List<StatBonus> StatBonuses => statBonuses;
-
-        public EquipmentItem()
-        {
-            maxStackQuantity = 1;
-        }
-
         [Serializable]
         public class StatBonus
         {
@@ -29,6 +18,17 @@ namespace blai30.RPGSystems.Inventory
             public StatType StatType => statType;
             public StatModifierType ModifierType => modifierType;
             public float Value => value;
+        }
+
+        [Header("Equipment Item")]
+        [SerializeField] protected EquipmentType equipmentType = null;
+        [SerializeField] protected List<StatBonus> statBonuses = new List<StatBonus>();
+
+        public List<StatBonus> StatBonuses => statBonuses;
+
+        public EquipmentItem()
+        {
+            maxStackQuantity = 1;
         }
 
         public bool UseItem()

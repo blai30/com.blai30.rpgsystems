@@ -1,3 +1,5 @@
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace blai30.RPGSystems.Stats
@@ -10,5 +12,10 @@ namespace blai30.RPGSystems.Stats
 
         public string Name => name;
         public float DefaultValue => defaultValue;
+
+        private void OnValidate()
+        {
+            name = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this));
+        }
     }
 }

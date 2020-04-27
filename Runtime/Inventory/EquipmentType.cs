@@ -1,3 +1,5 @@
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace blai30.RPGSystems.Inventory
@@ -10,5 +12,10 @@ namespace blai30.RPGSystems.Inventory
 
         public string Name => name;
         public Sprite Sprite => icon;
+
+        private void OnValidate()
+        {
+            name = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this));
+        }
     }
 }

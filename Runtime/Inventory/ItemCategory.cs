@@ -1,3 +1,5 @@
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace blai30.RPGSystems.Inventory
@@ -7,5 +9,10 @@ namespace blai30.RPGSystems.Inventory
     {
         [SerializeField] private string categoryName = "New Category";
         [SerializeField] private Sprite categoryIcon = null;
+
+        private void OnValidate()
+        {
+            categoryName = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this));
+        }
     }
 }
