@@ -7,7 +7,7 @@ using UnityEngine;
 namespace blai30.RPGSystems.Inventory
 {
     [Serializable]
-    public abstract class Item : ScriptableObject
+    public abstract class ItemData : ScriptableObject
     {
         [Header("Properties")]
         [SerializeField] protected string itemName = "New Item";
@@ -24,11 +24,6 @@ namespace blai30.RPGSystems.Inventory
         public int SellPrice => sellPrice;
         public int MaxStackQuantity => maxStackQuantity;
         public ItemRarity RarityTier => rarityTier;
-
-        private void OnValidate()
-        {
-            itemName = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this));
-        }
     }
 
     internal interface IUsable

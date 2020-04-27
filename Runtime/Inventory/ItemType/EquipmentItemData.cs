@@ -6,7 +6,7 @@ using UnityEngine;
 namespace blai30.RPGSystems.Inventory
 {
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Equipment Item", order = 0)]
-    public class EquipmentItem : Item, IUsable
+    public class EquipmentItemData : ItemData, IUsable
     {
         [Serializable]
         public class StatBonus
@@ -26,7 +26,7 @@ namespace blai30.RPGSystems.Inventory
 
         public List<StatBonus> StatBonuses => statBonuses;
 
-        public EquipmentItem()
+        public EquipmentItemData()
         {
             maxStackQuantity = 1;
         }

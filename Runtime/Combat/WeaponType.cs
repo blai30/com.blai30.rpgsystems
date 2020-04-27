@@ -12,10 +12,5 @@ namespace blai30.RPGSystems.Combat
 
         public string Name => name;
         public Sprite Sprite => icon;
-
-        private void OnValidate()
-        {
-            name = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this));
-        }
     }
 }

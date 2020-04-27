@@ -12,10 +12,5 @@ namespace blai30.RPGSystems.Stats
 
         public string Name => name;
         public float DefaultValue => defaultValue;
-
-        private void OnValidate()
-        {
-            name = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this));
-        }
     }
 }
