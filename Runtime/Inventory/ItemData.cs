@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 namespace blai30.RPGSystems.Inventory
@@ -18,7 +16,11 @@ namespace blai30.RPGSystems.Inventory
         [SerializeField] protected ItemRarity rarityTier = null;
         [SerializeField] protected List<ItemCategory> itemCategories = null;
 
-        public string ItemName => itemName;
+        public string ItemName
+        {
+            get => itemName;
+            set => itemName = value;
+        }
         public Sprite ItemIcon => itemIcon;
         public bool CanSell => canSell;
         public int SellPrice => sellPrice;
