@@ -9,7 +9,7 @@ namespace blai30.RPGSystems.Inventory
     {
         [Header("Properties")]
         [SerializeField] protected string itemName = "New Item";
-        [SerializeField, AssetIcon] protected Sprite itemIcon = null;
+        [SerializeField] protected Sprite itemIcon = null;
         [SerializeField] protected bool canSell = true;
         [SerializeField, Min(0), DisableIf(nameof(canSell), false)] protected int sellPrice = 10;
         [SerializeField, Range(1, 999)] protected int maxStackQuantity = 100;
