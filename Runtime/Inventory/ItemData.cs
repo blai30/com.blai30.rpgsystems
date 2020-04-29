@@ -12,7 +12,7 @@ namespace blai30.RPGSystems.Inventory
         [SerializeField] protected Sprite itemIcon = null;
         [SerializeField] protected bool canSell = true;
         [SerializeField, Min(0)] protected int sellPrice = 10;
-        [SerializeField] protected int maxStackQuantity = 100;
+        [SerializeField, Range(1, 999)] protected int maxStackQuantity = 100;
         [SerializeField] protected ItemRarity rarityTier = null;
         [SerializeField] protected List<ItemCategory> itemCategories = null;
 
