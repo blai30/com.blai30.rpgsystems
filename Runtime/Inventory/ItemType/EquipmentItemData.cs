@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using blai30.RPGSystems.Stats;
 using Sirenix.OdinInspector;
@@ -13,7 +12,9 @@ namespace blai30.RPGSystems.Inventory
         [Serializable]
         public class StatBonus
         {
-            [SerializeField] private StatType statType = null;
+            [SerializeField]
+            [AssetSelector(DropdownTitle = "Select stat type")]
+            private StatType statType = null;
             [SerializeField] private StatModifierType modifierType = 0;
             [SerializeField] private float value = 0f;
 
@@ -28,7 +29,7 @@ namespace blai30.RPGSystems.Inventory
 
         [SerializeField]
         [BoxGroup(GROUP_EQUIPMENT)]
-        [ValueDropdown("GetEquipmentTypes", FlattenTreeView = true, NumberOfItemsBeforeEnablingSearch = 1)]
+        [AssetSelector(DropdownTitle = "Select equipment type")]
         protected EquipmentType equipmentType = null;
 
         [SerializeField]
@@ -49,11 +50,6 @@ namespace blai30.RPGSystems.Inventory
         public bool UseItem()
         {
             return false;
-        }
-
-        private IEnumerable GetEquipmentTypes()
-        {
-            return RpgDatabase.GetAllScriptableObjects(typeof(EquipmentType));
         }
     }
 }

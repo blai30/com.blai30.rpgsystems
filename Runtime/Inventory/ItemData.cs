@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -47,7 +46,7 @@ namespace blai30.RPGSystems.Inventory
 
         [SerializeField]
         [BoxGroup(GROUP_VALUE)]
-        [ValueDropdown("GetRarityTiers", FlattenTreeView = true, NumberOfItemsBeforeEnablingSearch = 1)]
+        [AssetSelector(DropdownTitle = "Select rarity tier")]
         protected RarityTier rarityTier = null;
 
         [SerializeField]
@@ -68,11 +67,6 @@ namespace blai30.RPGSystems.Inventory
         public int MaxStackQuantity => maxStackQuantity;
         public RarityTier RarityTier => rarityTier;
         public List<ItemCategory> ItemCategories => itemCategories;
-
-        private IEnumerable GetRarityTiers()
-        {
-            return RpgDatabase.GetAllScriptableObjects(typeof(RarityTier));
-        }
     }
 
     internal interface IUsable
