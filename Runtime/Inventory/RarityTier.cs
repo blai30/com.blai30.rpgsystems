@@ -1,11 +1,9 @@
-using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 namespace blai30.RPGSystems.Inventory
 {
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Rarity Tier")]
-    public class ItemRarity : ScriptableObject
+    public class RarityTier : ScriptableObject
     {
         [SerializeField] private new string name = "New Rarity Tier Name";
         [SerializeField] private int rank = 0;
