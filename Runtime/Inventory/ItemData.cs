@@ -16,18 +16,15 @@ namespace blai30.RPGSystems.Inventory
 
         [SerializeField]
         [BoxGroup(GROUP_GENERAL)]
-        [HorizontalGroup("General/Split")]
         [VerticalGroup(GENERAL_VERTICAL_GROUP)]
         protected string itemName = "New Item";
 
         [SerializeField]
-        [BoxGroup(GROUP_GENERAL)]
         [TextArea(4, 16)]
         [VerticalGroup(GENERAL_VERTICAL_GROUP)]
         protected string itemDescription = "";
 
         [SerializeField]
-        [BoxGroup(GROUP_GENERAL)]
         [HideLabel, PreviewField(96)]
         [HorizontalGroup("General/Split", 96)]
         protected Sprite itemIcon = null;
@@ -46,7 +43,7 @@ namespace blai30.RPGSystems.Inventory
 
         [SerializeField]
         [BoxGroup(GROUP_VALUE)]
-        [AssetSelector(DropdownTitle = "Select rarity tier")]
+        [AssetSelector(DropdownTitle = "Rarity tier")]
         protected RarityTier rarityTier = null;
 
         [SerializeField]

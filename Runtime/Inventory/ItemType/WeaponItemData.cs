@@ -13,12 +13,12 @@ namespace blai30.RPGSystems.Inventory
 
         [SerializeField]
         [BoxGroup(GROUP_WEAPON)]
-        [AssetSelector(DropdownTitle = "Select weapon type")]
+        [AssetSelector(DropdownTitle = "Weapon type")]
         protected WeaponType weaponType = null;
 
         [SerializeField]
         [BoxGroup(GROUP_WEAPON)]
-        [AssetSelector(DropdownTitle = "Select damage type")]
+        [AssetSelector(DropdownTitle = "Damage type")]
         protected DamageType damageType = null;
 
         #endregion

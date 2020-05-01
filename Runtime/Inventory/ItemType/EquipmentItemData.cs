@@ -13,7 +13,7 @@ namespace blai30.RPGSystems.Inventory
         public class StatBonus
         {
             [SerializeField]
-            [AssetSelector(DropdownTitle = "Select stat type")]
+            [AssetSelector(DropdownTitle = "Stat type")]
             private StatType statType = null;
             [SerializeField] private StatModifierType modifierType = 0;
             [SerializeField] private float value = 0f;
@@ -29,7 +29,7 @@ namespace blai30.RPGSystems.Inventory
 
         [SerializeField]
         [BoxGroup(GROUP_EQUIPMENT)]
-        [AssetSelector(DropdownTitle = "Select equipment type")]
+        [AssetSelector(DropdownTitle = "Equipment type")]
         protected EquipmentType equipmentType = null;
 
         [SerializeField]
