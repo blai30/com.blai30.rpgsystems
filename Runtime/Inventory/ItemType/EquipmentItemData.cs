@@ -20,10 +20,10 @@ namespace blai30.RPGSystems.Inventory
         public EquipmentType EquipmentType => equipmentType;
         public List<StatBonus> StatBonuses => statBonuses;
 
-        public EquipmentItemData()
-        {
-            maxStackQuantity = 1;
-        }
+        // public EquipmentItemData()
+        // {
+        //     maxStackQuantity = 1;
+        // }
 
         public bool UseItem()
         {
