@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using blai30.RPGSystems.Stats;
 using UnityEngine;
 
 namespace blai30.RPGSystems.Inventory
 {
+    [Serializable]
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Equipment Item", order = 0)]
     public class EquipmentItemData : ItemData, IUsable
     {

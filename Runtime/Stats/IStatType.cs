@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace blai30.RPGSystems.Stats
 {
     public interface IStatType
@@ -5,5 +7,7 @@ namespace blai30.RPGSystems.Stats
         string Name { get; }
         string Abbreviation { get; }
         float DefaultValue { get; }
+        Sprite Icon { get; }
+        Color Color { get; }
     }
 }
