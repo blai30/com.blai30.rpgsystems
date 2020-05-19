@@ -27,7 +27,8 @@ namespace blai30.RPGSystems.Inventory
 
         public void OnBeforeSerialize()
         {
-            if (string.IsNullOrEmpty(id))
+            // Generate new GUID if field is blank
+            if (string.IsNullOrWhiteSpace(id))
             {
                 id = Guid.NewGuid().ToString();
             }
