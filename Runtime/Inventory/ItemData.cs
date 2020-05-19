@@ -5,10 +5,12 @@ using UnityEngine;
 namespace blai30.RPGSystems.Inventory
 {
     [Serializable]
-    public abstract class ItemData : ScriptableObject
+    public abstract class ItemData : ScriptableObject, ISerializationCallbackReceiver
     {
         #region Fields
 
+        [SerializeField]
+        protected string id = "";
         [SerializeField]
         protected string itemName = "New Item";
         [SerializeField]
@@ -28,6 +30,7 @@ namespace blai30.RPGSystems.Inventory
 
         #endregion
 
+        public string Id => id;
         public string ItemName
         {
             get => itemName;
@@ -40,6 +43,18 @@ namespace blai30.RPGSystems.Inventory
         public int MaxStackQuantity => maxStackQuantity;
         public RarityTier RarityTier => rarityTier;
         public List<ItemCategory> ItemCategories => itemCategories;
+
+        public void OnBeforeSerialize()
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                id = Guid.NewGuid().ToString();
+            }
+        }
+
+        public void OnAfterDeserialize()
+        {
+        }
     }
 
     internal interface IUsable
