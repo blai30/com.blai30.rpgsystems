@@ -5,7 +5,7 @@ namespace blai30.RPGSystems.Inventory
 {
     [Serializable]
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Rarity Tier")]
-    public class RarityTier : ScriptableObject
+    public class RarityTier : ScriptableObject, ISerializationCallbackReceiver, IIdentifier
     {
         #region Fields
 

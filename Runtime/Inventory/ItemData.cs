@@ -5,7 +5,7 @@ using UnityEngine;
 namespace blai30.RPGSystems.Inventory
 {
     [Serializable]
-    public abstract class ItemData : ScriptableObject, ISerializationCallbackReceiver
+    public abstract class ItemData : ScriptableObject, ISerializationCallbackReceiver, IIdentifier
     {
         #region Fields
 

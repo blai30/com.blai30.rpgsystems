@@ -5,7 +5,7 @@ namespace blai30.RPGSystems.Inventory
 {
     [Serializable]
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Item Category", order = 0)]
-    public class ItemCategory : ScriptableObject
+    public class ItemCategory : ScriptableObject, ISerializationCallbackReceiver, IIdentifier
     {
         #region Fields
 
