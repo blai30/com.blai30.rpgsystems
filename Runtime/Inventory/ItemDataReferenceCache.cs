@@ -26,11 +26,13 @@ namespace blai30.RPGSystems.Inventory
         }
 
 #if UNITY_EDITOR
+        [ContextMenu("Load References")]
         public void LoadReferences()
         {
             items = FindAssetsByType<ItemData>(foldersToSearchIn);
         }
 
+        [ContextMenu("Clear References")]
         public void ClearReferences()
         {
             items.Clear();
