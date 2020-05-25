@@ -1,44 +1,42 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
-#if UNITY_EDITOR
-#endif
 
 namespace blai30.RPGSystems.Inventory
 {
     [CreateAssetMenu]
     public class ItemDataReferenceCache : ScriptableObject
     {
-        [SerializeField] private List<ItemData> items;
-        [SerializeField] private string[] foldersToSearchIn;
+        [SerializeField]
+        private List<ItemData> itemsCache;
 
-        public ItemData GetItemDataReference(string itemId)
+        [SerializeField]
+        private string[] foldersToSearchIn;
+
+        private Dictionary<string, ItemData> _idObjMap;
+
+        public ItemData GetItemData(string itemId)
         {
-            foreach (ItemData item in items)
-            {
-                if (item.Id == itemId)
-                {
-                    return item;
-                }
-            }
-
-            return null;
+            return _idObjMap[itemId];
         }
 
 #if UNITY_EDITOR
         [ContextMenu("Load References")]
         public void LoadReferences()
         {
-            items = FindAssetsByType<ItemData>(foldersToSearchIn);
+            itemsCache = FindAssetsByType<ItemData>(foldersToSearchIn);
+            _idObjMap = itemsCache.ToDictionary(item => item.Id);
         }
 
         [ContextMenu("Clear References")]
         public void ClearReferences()
         {
-            items.Clear();
+            itemsCache.Clear();
+            _idObjMap.Clear();
         }
 
-        public static List<T> FindAssetsByType<T>(params string[] folders) where T : Object
+        private static List<T> FindAssetsByType<T>(params string[] folders) where T : Object
         {
             string type = typeof(T).Name;
 
