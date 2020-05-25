@@ -5,7 +5,7 @@ namespace blai30.RPGSystems.Inventory
 {
     [Serializable]
     [CreateAssetMenu(menuName = "RPG Systems/Inventory/Equipment Type")]
-    public class EquipmentType : ScriptableObject, ISerializationCallbackReceiver, IIdentifier
+    public class EquipmentType : ScriptableObject, ISerializationCallbackReceiver, IIdentifiable
     {
         #region Fields
 
