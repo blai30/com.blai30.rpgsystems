@@ -6,17 +6,17 @@ using UnityEngine;
 namespace blai30.RPGSystems.Inventory
 {
     [CreateAssetMenu]
-    public class ItemDataReferenceCache : ScriptableObject
+    public class ItemDataReferences : ScriptableObject
     {
         [SerializeField]
-        private List<ItemData> itemsCache;
+        private List<ItemData> references;
 
         [SerializeField]
         private string[] foldersToSearchIn;
 
         private Dictionary<string, ItemData> _idObjMap;
 
-        public ItemData GetItemData(string itemId)
+        public ItemData GetById(string itemId)
         {
             return _idObjMap[itemId];
         }
@@ -25,15 +25,15 @@ namespace blai30.RPGSystems.Inventory
         [ContextMenu("Load References")]
         public void LoadReferences()
         {
-            itemsCache = FindAssetsByType<ItemData>(foldersToSearchIn);
-            _idObjMap = itemsCache.ToDictionary(item => item.Id);
+            references = FindAssetsByType<ItemData>(foldersToSearchIn);
+            _idObjMap = new Dictionary<string, ItemData>(references.ToDictionary(item => item.Id));
         }
 
         [ContextMenu("Clear References")]
         public void ClearReferences()
         {
-            itemsCache.Clear();
-            _idObjMap.Clear();
+            references = new List<ItemData>();
+            _idObjMap = new Dictionary<string, ItemData>();
         }
 
         private static List<T> FindAssetsByType<T>(params string[] folders) where T : Object
