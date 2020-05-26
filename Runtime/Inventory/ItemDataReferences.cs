@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 using UnityEditor;
 using UnityEngine;
 
@@ -8,17 +11,24 @@ namespace blai30.RPGSystems.Inventory
     [CreateAssetMenu]
     public class ItemDataReferences : ScriptableObject
     {
+#if ODIN_INSPECTOR
+        [FolderPath]
+#endif
+        [SerializeField]
+        private string[] foldersToSearchIn;
+
         [SerializeField]
         private List<ItemData> references;
 
         [SerializeField]
-        private string[] foldersToSearchIn;
+        private Dictionary<string, ItemData> stringObjMap;
 
-        private Dictionary<string, ItemData> _idObjMap;
+        public bool IsInitialized => stringObjMap != null;
 
         public ItemData GetById(string itemId)
         {
-            return _idObjMap[itemId];
+            EnsureInitialized();
+            return stringObjMap[itemId];
         }
 
 #if UNITY_EDITOR
@@ -26,14 +36,14 @@ namespace blai30.RPGSystems.Inventory
         public void LoadReferences()
         {
             references = FindAssetsByType<ItemData>(foldersToSearchIn);
-            _idObjMap = new Dictionary<string, ItemData>(references.ToDictionary(item => item.Id));
+            EnsureInitialized();
         }
 
         [ContextMenu("Clear References")]
         public void ClearReferences()
         {
             references = new List<ItemData>();
-            _idObjMap = new Dictionary<string, ItemData>();
+            stringObjMap = new Dictionary<string, ItemData>();
         }
 
         private static List<T> FindAssetsByType<T>(params string[] folders) where T : Object
@@ -62,5 +72,16 @@ namespace blai30.RPGSystems.Inventory
             return assets;
         }
 #endif
+
+        private void EnsureInitialized()
+        {
+            if (IsInitialized)
+            {
+                return;
+            }
+
+            stringObjMap = new Dictionary<string, ItemData>(references.ToDictionary(item => item.Id));
+            Debug.LogWarning($"{nameof(ItemDataReferences)} was initialized lazily because it wasn't initialized before use!");
+        }
     }
 }
